@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Math Past Questions</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    const DATA = [
+      { id:1, year:2019, topic:"Arithmetic", q:"What is 48 ÷ 6 ?", a:"8" },
+      { id:2, year:2020, topic:"Fractions", q:"Simplify 12/18.", a:"2/3" },
+      { id:3, year:2021, topic:"Algebra", q:"Solve for x: 2x + 5 = 15.", a:"x = 5" },
+      { id:4, year:2022, topic:"Percentages", q:"Find 20% of 250.", a:"50" },
+      { id:5, year:2023, topic:"Word Problem", q:"A book costs ₦800. If you get 25% discount, how much do you pay?", a:"₦600" },
+    ];
+    function render(list){
+      const wrap = document.getElementById('list');
+      wrap.innerHTML = "";
+      list.forEach(item=>{
+        const section = document.createElement('section');
+        section.className = "card";
+        section.innerHTML = `
+          <p class="badge">${item.year}</p> <span class="badge">${item.topic}</span>
+          <h3 style="margin:.3rem 0 0.5rem 0;">Q${item.id}: ${item.q}</h3>
+          <button aria-expanded="false" onclick="toggleAns(this)">Show Answer</button>
+          <p class="answer" style="display:none;margin-top:8px;color:green;"><strong>Answer:</strong> ${item.a}</p>
+        `;
+        wrap.appendChild(section);
+      });
+    }
+    function toggleAns(btn){
+      const p = btn.nextElementSibling;
+      const show = p.style.display === "none";
+      p.style.display = show ? "block" : "none";
+      btn.textContent = show ? "Hide Answer" : "Show Answer";
+      btn.setAttribute("aria-expanded", show ? "true" : "false");
+    }
+    function applyFilters(){
+      const year = document.getElementById('year').value;
+      const text = document.getElementById('search').value.trim().toLowerCase();
+      let out = DATA.slice();
+      if(year !== "all"){ out = out.filter(x=> String(x.year) === year); }
+      if(text){ out = out.filter(x => (x.q+x.a+x.topic).toLowerCase().includes(text)); }
+      render(out);
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      render(DATA);
+    });
+  </script>
+</head>
+<body>
+<header>
+  <nav class="nav container">
+    <strong>Math</strong>
+    <span style="flex:1"></span>
+    <a href="index.html">Home</a>
+    <a href="english.html">English</a>
+    <a href="math.html">Math</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1>Math Past Questions</h1>
+  <div class="card" style="margin-bottom:16px;">
+    <label>Year:
+      <select id="year" onchange="applyFilters()">
+        <option value="all">All</option>
+        <option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option>
+      </select>
+    </label>
+    <br/><br/>
+    <input id="search" placeholder="Search topic or keyword…" oninput="applyFilters()" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px" />
+  </div>
+
+  <div id="list" class="grid"></div>
+</main>
+
+<footer class="footer">© <span id="y"></span> smilelang · Math</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
