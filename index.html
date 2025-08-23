@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Past Questions · Home</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+  <nav class="nav container">
+    <strong>Past Questions</strong>
+    <span style="flex:1"></span>
+    <a href="index.html">Home</a>
+    <a href="english.html">English</a>
+    <a href="math.html">Math</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1>Welcome 👋</h1>
+  <p>Select a subject to practice past questions and reveal answers.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h2>English</h2>
+      <p>Grammar, comprehension, vocabulary.</p>
+      <a href="english.html"><button>Open English</button></a>
+    </div>
+    <div class="card">
+      <h2>Math</h2>
+      <p>Arithmetic, algebra, word problems.</p>
+      <a href="math.html"><button>Open Math</button></a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">© <span id="y"></span> smilelang · GitHub Pages</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
