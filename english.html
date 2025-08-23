@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>English Past Questions</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    const DATA = [
+      { id:1, year:2019, topic:"Nouns", q:"Write the plural of <em>child</em>.", a:"Children" },
+      { id:2, year:2020, topic:"Antonyms", q:"Give the opposite of <em>scarce</em>.", a:"Abundant" },
+      { id:3, year:2021, topic:"Prepositions", q:"Fill in: She arrived __ the airport at 7 pm.", a:"at" },
+      { id:4, year:2022, topic:"Concord", q:"Choose the correct: The list of items <em>is/are</em> on the table.", a:"is" },
+      { id:5, year:2023, topic:"Vocabulary", q:"Meaning of <em>reluctant</em>.", a:"Unwilling / hesitant" },
+    ];
+    function render(list){
+      const wrap = document.getElementById('list');
+      wrap.innerHTML = "";
+      list.forEach(item=>{
+        const section = document.createElement('section');
+        section.className = "card";
+        section.innerHTML = `
+          <p class="badge">${item.year}</p> <span class="badge">${item.topic}</span>
+          <h3 style="margin:.3rem 0 0.5rem 0;">Q${item.id}: ${item.q}</h3>
+          <button aria-expanded="false" onclick="toggleAns(this)">Show Answer</button>
+          <p class="answer" style="display:none;margin-top:8px;color:green;"><strong>Answer:</strong> ${item.a}</p>
+        `;
+        wrap.appendChild(section);
+      });
+    }
+    function toggleAns(btn){
+      const p = btn.nextElementSibling;
+      const show = p.style.display === "none";
+      p.style.display = show ? "block" : "none";
+      btn.textContent = show ? "Hide Answer" : "Show Answer";
+      btn.setAttribute("aria-expanded", show ? "true" : "false");
+    }
+    function applyFilters(){
+      const year = document.getElementById('year').value;
+      const text = document.getElementById('search').value.trim().toLowerCase();
+      let out = DATA.slice();
+      if(year !== "all"){ out = out.filter(x=> String(x.year) === year); }
+      if(text){ out = out.filter(x => (x.q+x.a+x.topic).toLowerCase().includes(text)); }
+      render(out);
+    }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      render(DATA);
+    });
+  </script>
+</head>
+<body>
+<header>
+  <nav class="nav container">
+    <strong>English</strong>
+    <span style="flex:1"></span>
+    <a href="index.html">Home</a>
+    <a href="english.html">English</a>
+    <a href="math.html">Math</a>
+  </nav>
+</header>
+
+<main class="container">
+  <h1>English Past Questions</h1>
+  <div class="card" style="margin-bottom:16px;">
+    <label>Year:
+      <select id="year" onchange="applyFilters()">
+        <option value="all">All</option>
+        <option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option>
+      </select>
+    </label>
+    <br/><br/>
+    <input id="search" placeholder="Search topic or keyword…" oninput="applyFilters()" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:10px" />
+  </div>
+
+  <div id="list" class="grid"></div>
+</main>
+
+<footer class="footer">© <span id="y"></span> smilelang · English</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
