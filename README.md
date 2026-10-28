@@ -1,34 +1,14 @@
-# Smile Student
+# Smilelang · Past Questions practice prototype
 
-An early static study website with English and mathematics questions, sample answers, and simple filtering. This prototype documents the learning steps that preceded the React-based [Smile Learning](https://github.com/miikese/past-quest-solver) interface.
+A complete, dependency-free static practice interface with the original English and Math sample questions. This is sample material, not a verified exam bank; years are illustrative. No accounts, saved progress or automatically graded scores.
 
-## Features
+Includes responsive cards, subject navigation, keyword and year filters, live result counts, empty states, reset controls and accessible answer-reveal buttons.
 
-- Separate English and mathematics question pages.
-- Keyword search and year filters.
-- Answer controls that toggle their accessible expanded state.
-- Sample study content held directly in the page scripts.
-
-## Stack and structure
-
-HTML, CSS, and vanilla JavaScript. `index.html` is the entry page; `english.html` and `math.html` contain the subject views, and `styles.css` provides shared styling.
-
-## Preview locally
-
-With Python 3 installed:
+## Run locally
 
 ```sh
-git clone https://github.com/miikese/Smile-student-.git
 cd Smile-student-
-python3 -m http.server 8000
+python3 -m http.server 3312 --bind 127.0.0.1
 ```
 
-Open http://localhost:8000. No frontend package installation is required.
-
-## Status
-
-Learning prototype with sample content. It is separate from the newer React application and is not presented as a production exam-content service.
-
-## Author
-
-**Michael Ikese Emmanuel** · [@miikese](https://github.com/miikese) · [Engineering portfolio](https://github.com/miikese/portfolio-site)
+Open http://localhost:3312. Publish the repository root on GitHub Pages if desired. No build or dependencies required.
